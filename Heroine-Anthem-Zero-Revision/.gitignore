@@ -1,0 +1,18 @@
+# Release zip goes on the GitHub Releases page, not in git
+release/
+build/
+
+# Game files - never commit these
+*.assets
+*.dll
+*.exe
+*.orig
+*.bak
+backup/
+
+# Built patches ship in the release zip
+*.hazpatch
+
+# Review sheets contain the game's original script
+*.xlsx
+*.csv

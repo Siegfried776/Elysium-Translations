@@ -1,0 +1,17 @@
+# Release zip goes on the GitHub Releases page, not in git
+release/
+build/
+
+# Game files - never commit these
+*.assets
+*.dll
+*.orig
+*.bak
+*.exe
+*.xdelta
+
+# Review sheets contain the game's original script
+*.csv
+
+__pycache__/
+*.pyc
