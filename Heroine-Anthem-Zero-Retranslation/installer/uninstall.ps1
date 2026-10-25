@@ -1,5 +1,5 @@
 . (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'haz_common.ps1')
-Write-Host 'Heroine Anthem Zero - English revision patch uninstaller' -ForegroundColor Cyan
+Write-Host 'Heroine Anthem Zero - English retranslation patch uninstaller' -ForegroundColor Cyan
 foreach ($f in $Files) {
     $orig = Join-Path $Data $f
     $bak  = Join-Path $Backup $f

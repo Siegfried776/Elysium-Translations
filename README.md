@@ -5,7 +5,7 @@ Game translation projects by **Siegfried776**: new English translations and tran
 | Project | Game | Version | Download |
 |---|---|---|---|
 | [Dream — English Retranslation](Dream-English-Retranslation/) | 映夢 Dream (Steam) | 1.1 (final) | [Releases](../../releases) |
-| [Heroine Anthem Zero — English Revision](Heroine-Anthem-Zero-Revision/) | Heroine Anthem Zero (Steam) | 1.0 | [Releases](../../releases) |
+| [Heroine Anthem Zero — English Retranslation](Heroine-Anthem-Zero-Retranslation/) | Heroine Anthem Zero (Steam) | 1.0 | [Releases](../../releases) |
 
 ## About
 

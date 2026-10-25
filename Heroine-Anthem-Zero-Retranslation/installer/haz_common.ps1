@@ -1,10 +1,10 @@
-# Heroine Anthem Zero - English revision patch (full game: all dialogue, UI, items, quests, maps)
+# Heroine Anthem Zero - English retranslation patch (full game: all dialogue, UI, items, quests, maps)
 $ErrorActionPreference = 'Stop'
 $Root  = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Game  = Split-Path -Parent $Root
 $Data  = Join-Path $Game 'HeroineAnthemZero_Data'
 $Backup = Join-Path $Root 'backup'
-$Files = @('sharedassets0.assets', 'resources.assets')
+$Files = @('sharedassets0.assets', 'resources.assets', 'level0', 'Managed\Assembly-CSharp.dll')
 
 function Get-Sha([string]$Path) { (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash }
 

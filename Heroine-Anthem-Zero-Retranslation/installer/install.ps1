@@ -1,5 +1,5 @@
 . (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'haz_common.ps1')
-Write-Host 'Heroine Anthem Zero - English revision patch installer' -ForegroundColor Cyan
+Write-Host 'Heroine Anthem Zero - English retranslation patch installer' -ForegroundColor Cyan
 if (-not (Test-Path -LiteralPath $Data)) { throw "Can't find $Data. Put this folder inside the game folder (next to HeroineAnthemZero.exe)." }
 New-Item -ItemType Directory -Force -Path $Backup | Out-Null
 foreach ($f in $Files) {
@@ -10,7 +10,7 @@ foreach ($f in $Files) {
     $cur = Get-Sha $orig
     if ($cur -eq $patch.NewHash) { Write-Host "  already patched, skipping." -ForegroundColor Green; continue }
     if ($cur -eq $patch.OldHash) {
-        if (-not (Test-Path -LiteralPath $bak)) { Copy-Item -LiteralPath $orig -Destination $bak; Write-Host '  original backed up.' }
+        if (-not (Test-Path -LiteralPath $bak)) { New-Item -ItemType Directory -Force -Path (Split-Path -Parent $bak) | Out-Null; Copy-Item -LiteralPath $orig -Destination $bak; Write-Host '  original backed up.' }
         $source = $bak
     } elseif ((Test-Path -LiteralPath $bak) -and ((Get-Sha $bak) -eq $patch.OldHash)) {
         $source = $bak
