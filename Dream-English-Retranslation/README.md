@@ -2,6 +2,8 @@
 
 A complete new English translation of **映夢 Dream** ([Steam](https://store.steampowered.com/app/1345750/), RisingWin), translated directly from the original Traditional Chinese script.
 
+**Why a retranslation?** The official English is mostly accurate, but stiff and literal. A line-by-line audit against the Chinese found mistranslations in about 1 line in 30 (70 of 2,157), five of them serious, such as a puzzle clue that loses its meaning. This one aims for English that reads like a native-written visual novel.
+
 > **How this was made:** this translation and its tools were produced by **Claude Opus 5.5**, Anthropic's AI model, under the direction of **Siegfried776**. Claude translated the script from the Chinese source, edited and audited it, and wrote the patching and save-fix tools. Siegfried776 piloted the project: set the style, made the creative calls, playtested the game, and found and reported the bugs.
 
 **Version 1.1 (final)** · 2,195 lines: dialogue, narration, items, notes, journal entries, menus and chapter titles.

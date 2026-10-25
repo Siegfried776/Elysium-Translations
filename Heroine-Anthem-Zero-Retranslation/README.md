@@ -2,6 +2,8 @@
 
 A complete new English translation of **Heroine Anthem Zero** ([Steam](https://store.steampowered.com/app/537990/), Winking), translated from scratch from the original Traditional Chinese script.
 
+**Why a retranslation?** The official English often gets the Chinese wrong: a line-by-line check of Chapter 1 found about 1 line in 12 to 15 mistranslated, some saying the opposite of what the character means. It also loses many of the characters' jokes.
+
 > **This is an AI translation.** The translation, editing, reviews and patch tools were produced by **Claude Opus 5.5**, Anthropic's AI model, working under the direction of **Siegfried776**. Claude retranslated the script from the Chinese source, checked it line by line, and wrote the installer. Siegfried776 piloted the project: chose the scope and the voice, made the creative and terminology calls, and handled testing and bug reports. No human translator worked on this text.
 
 **Version 1.0** · about 3,970 dialogue lines plus the quest log, items, skills, maps, menus, hints and name plates.
