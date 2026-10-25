@@ -23,4 +23,4 @@ These translations and their tools were produced by Claude Opus 5.5 (Anthropic's
 
 ## Disclaimer
 
-These are unofficial fan translations, not affiliated with or endorsed by the games' developers or publishers.
+These are unofficial fan translations, not affiliated with or endorsed by the games' developers or publishers, unless stated otherwise.
