@@ -1,0 +1,27 @@
+Third-party software and fonts in this package
+===============================================
+
+EasyRPG Player 0.8.1.1  (files\new\RPG_RT.exe, installed as data\RPG_RT.exe)
+  Free RPG Maker 2000/2003 interpreter by the EasyRPG Project. GNU GPL v3 or later
+  (EasyRPG-Player_GPL-3.0.txt). Unmodified official Windows x64 build from
+  https://easyrpg.org/player/downloads/
+  Source code: https://github.com/EasyRPG/Player/tree/0.8.1.1
+
+Ark Pixel Font, 12px proportional (latin)  (data\Font\Font.ttf, Font2.ttf)
+  Copyright (c) 2021, TakWolf (https://takwolf.com). SIL Open Font License 1.1
+  (Ark-Pixel-Font_OFL-1.1.txt). https://github.com/TakWolf/ark-pixel-font
+  Modified for this patch: font metrics (OS/2 and hhea ascent/descent) set so EasyRPG draws it at
+  12 px, and the "`" character draws the dagger glyph. The glyph outlines are unchanged.
+
+xdelta3  (files\bin\xdelta3.exe)
+  By Joshua MacDonald. Apache License 2.0 (xdelta3_Apache-2.0.txt). https://github.com/jmacd/xdelta
+
+7-Zip 26.04  (files\bin\7z.exe, 7z.dll)
+  Copyright (C) Igor Pavlov. GNU LGPL with the unRAR restriction (7-Zip_License.txt).
+  Source code: https://www.7-zip.org/
+  Used only to unpack the official RPG Maker 2000 RTP installer during installation.
+
+RPG Maker 2000 RTP
+  Not included. The installer downloads KADOKAWA's free official RTP installer from
+  https://www.rpgmakerweb.com/run-time-package and copies only the sound files the game uses into
+  the game folder.

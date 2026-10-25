@@ -1,0 +1,20 @@
+# The release zip goes on the GitHub Releases page (tag lostmaria-v1.0), not in git
+*.zip
+build/
+release_build/
+
+# Game files and binaries: never commit these
+*.lmu
+*.ldb
+*.lmt
+*.lsd
+*.png
+*.wav
+*.mid
+*.exe
+*.dll
+*.xd
+*.xdelta
+
+__pycache__/
+*.pyc
