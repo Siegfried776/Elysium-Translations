@@ -2,7 +2,8 @@
 
 ## 1.0.1 — 2026-10-26
 
-- Manual (`data\manual.htm`): English edited to match the game's translation (natural wording, one tense, no passive phrasing). No other changes; installing over 1.0 is safe.
+- Manual (`data\manual.htm`): English edited to match the game's translation (natural wording, one tense, no passive phrasing). The game itself is unchanged.
+- Installer: installing over an earlier version no longer keeps files that version added as "originals", so Uninstall still restores the game exactly. Installing 1.0.1 over 1.0 is safe.
 
 ## 1.0 — 2026-10-25
 
