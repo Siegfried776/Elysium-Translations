@@ -4,8 +4,8 @@ Game translation projects by **Siegfried776**: new English translations and tran
 
 | Project | Game | Version | Download |
 |---|---|---|---|
-| [Dream — English Retranslation](Dream-English-Retranslation/) | 映夢 Dream (Steam) | 1.1 (final) | [Releases](../../releases) |
-| [Heroine Anthem Zero — English Retranslation](Heroine-Anthem-Zero-Retranslation/) | Heroine Anthem Zero (Steam) | 1.0 | [Releases](../../releases) |
+| [Dream — English Retranslation](Dream-English-Retranslation/) | 映夢 Dream ([Steam](https://store.steampowered.com/app/1345750/)) | 1.1 (final) | [Releases](../../releases) |
+| [Heroine Anthem Zero — English Retranslation](Heroine-Anthem-Zero-Retranslation/) | Heroine Anthem Zero ([Steam](https://store.steampowered.com/app/537990/)) | 1.0 | [Releases](../../releases) |
 | [LostMaria -The Nameless Flower- — English Translation](Lost-Maria-English/) | LostMaria -名もなき花- ([BOOTH](https://luciferbrand.booth.pm/items/4591083)) | 1.0 | [Releases](../../releases) |
 
 ## About
