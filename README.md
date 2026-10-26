@@ -14,6 +14,8 @@ I'm Siegfried. I've been learning Japanese roughly since 2018, and I've studied 
 
 This repository will serve to collect these projects and share them with the public. I work very hard to set the voice and style, make the naming and terminology calls, and playtest and report bugs.
 
+You may also call me "The Great Purger of Ellipses".
+
 ## Players
 
 Download the zip for your game from the [Releases](../../releases) page and follow the install steps in that project's README. You need to own the game. The patches contain no game files.
