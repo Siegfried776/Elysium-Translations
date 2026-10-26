@@ -73,16 +73,25 @@ Write-Host "Game files OK (v1.20). $($todo.Count) of $($rows.Count) files to ins
 
 # ---- 2. back up, then patch / copy ------------------------------------------------------------------
 if (-not (Test-Path -LiteralPath $bak)) { New-Item -ItemType Directory -Path $bak | Out-Null }
+# files an earlier install added (e.g. when updating to a newer version) are not originals: never back them up
+$addedFile = Join-Path $bak "added.txt"
+$wasAdded = @{}
+if (Test-Path -LiteralPath $addedFile) {
+    foreach ($l in (Get-Content -LiteralPath $addedFile -Encoding UTF8)) { if ($l) { $wasAdded[$l.ToLower()] = $true } }
+}
 if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Recurse -Force }
 New-Item -ItemType Directory -Path $tmp | Out-Null
 $n = 0
 foreach ($r in $todo) {
     $target = Join-Path $game $r.path
     $saved = Join-Path $bak $r.path
-    if (Test-Path -LiteralPath $target) {
+    if ($wasAdded.ContainsKey($r.path.ToLower())) {
+        # added by an earlier install: already listed for removal, nothing to back up
+    } elseif (Test-Path -LiteralPath $target) {
         if (-not (Test-Path -LiteralPath $saved)) { EnsureDir $saved; Copy-Item -LiteralPath $target -Destination $saved }
     } else {
         NoteAdded $r.path
+        $wasAdded[$r.path.ToLower()] = $true
     }
     $out = Join-Path $tmp "o.bin"
     if ($r.op -eq "patch") {

@@ -1,11 +1,13 @@
 """End-to-end test of the release zip in a clean copy of the game.
 
-python -I tools/test_release.py <zip> <rtp_installer.exe>
+python -I tools/test_release.py <zip> <rtp_installer.exe> [previous_release.zip]
 1. build/release_test = original/data + start.exe + Readme.txt (the game as bought, v1.20)
 2. extract the zip into it, run Install.bat's script (RTP from the local installer copy, as if downloaded)
 3. every data file must equal build/release_game (Player.exe there = data/RPG_RT.exe here), plus the RTP
    sounds (listed in rtp_files.tsv) byte-equal to the installer's files; nothing else added
 4. run the installer again (must be a no-op), then uninstall: the folder must equal the original again
+5. with a previous release zip: install it, install this one over it (result = this version), uninstall
+   (folder = original again)
 """
 import sys, os, shutil, subprocess, zipfile, hashlib, filecmp
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -90,5 +92,32 @@ if restored != before:
     fails.append("uninstall not clean")
 else:
     print("uninstall: folder identical to the original game")
+# 5. upgrade path (optional 3rd argument = the previous release zip): install it, then this one over it
+if len(sys.argv) > 3:
+    shutil.rmtree(T)
+    shutil.copytree(os.path.join(ORIG, "data"), os.path.join(T, "data"))
+    for f in ("start.exe", "Readme.txt"):
+        shutil.copy2(os.path.join(ORIG, f), T)
+    zipfile.ZipFile(os.path.abspath(sys.argv[3])).extractall(T)
+    if ps("install.ps1", "-RtpInstaller", rtp_exe):
+        fails.append("previous version install failed")
+    shutil.rmtree(os.path.join(T, "LostMaria_English"))
+    zipfile.ZipFile(zpath).extractall(T)
+    if ps("install.ps1", "-RtpInstaller", rtp_exe):
+        fails.append("upgrade install failed")
+    up = {k: v for k, v in tree(T).items() if k not in pkg}
+    bad = sorted(k for k in want if up.get(k) != want[k])
+    print(f"upgrade: {len(bad)} files differ from this version", bad[:5])
+    if bad:
+        fails.append("upgrade result differs")
+    if ps("uninstall.ps1"):
+        fails.append("uninstall after upgrade failed")
+    restored = {k: v for k, v in tree(T).items() if k not in pkg}
+    if restored != before:
+        print("after upgrade + uninstall, differs from the original:",
+              sorted(set(restored) ^ set(before))[:8])
+        fails.append("uninstall after upgrade not clean")
+    else:
+        print("upgrade + uninstall: folder identical to the original game")
 print("RESULT:", "PASS" if not fails else "FAIL " + "; ".join(fails))
 sys.exit(1 if fails else 0)

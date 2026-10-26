@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.0 — 2026-10
+## 1.0.1 — 2026-10-26
+
+- Manual (`data\manual.htm`): English edited to match the game's translation (natural wording, one tense, no passive phrasing). No other changes; installing over 1.0 is safe.
+
+## 1.0 — 2026-10-25
 
 - First release: complete English translation of LostMaria -名もなき花- v1.20 (BOOTH): script, database, menus, about 550 images and the manual.
 - Runs on EasyRPG Player 0.8.1.1, installed in place of the original runtime so `start.exe` works.

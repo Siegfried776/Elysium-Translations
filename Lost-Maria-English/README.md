@@ -6,7 +6,7 @@ A complete English fan translation of **LostMaria -名もなき花-** (LuciferBr
 
 > **How this was made:** this translation and its tools were produced by **Claude Opus 5.5**, Anthropic's AI model, under the direction of **Siegfried776**. Claude translated and edited the script, re-typeset the images and wrote the tools and installer. Siegfried776 piloted the project: set the style, made the creative calls, play-tested the whole game, and found and reported the bugs.
 
-**Version 1.0** · about 5,800 text entries (dialogue, narration, choices, menus, database) and about 550 images (menus, item and skill cards, battle screen, ending cards, staff roll, title screen), plus the game's manual.
+**Version 1.0.1** · about 5,800 text entries (dialogue, narration, choices, menus, database) and about 550 images (menus, item and skill cards, battle screen, ending cards, staff roll, title screen), plus the game's manual.
 
 Content warning (from the creators): horror, grotesque imagery and depictions of murder. The creators allow streaming and let's plays, monetized or not.
 
@@ -22,7 +22,7 @@ Content warning (from the creators): horror, grotesque imagery and depictions of
 ## Install
 
 1. Buy and download the game from [BOOTH](https://luciferbrand.booth.pm/items/4591083) and extract it. Keep its Japanese file names: if Windows shows garbled names, extract it again with [7-Zip](https://www.7-zip.org/).
-2. Download `LostMaria_English_v1.0.zip` from the [Releases](https://github.com/Siegfried776/Elysium-translations/releases) page and extract it.
+2. Download `LostMaria_English_v1.0.1.zip` from the [Releases](https://github.com/Siegfried776/Elysium-translations/releases) page and extract it.
 3. Put the `LostMaria_English` folder inside the game folder, next to `start.exe` and `data`.
 4. Double-click `LostMaria_English\Install.bat`.
 5. Play with `start.exe`.

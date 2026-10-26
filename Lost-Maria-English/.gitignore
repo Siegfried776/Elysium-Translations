@@ -1,4 +1,4 @@
-# The release zip goes on the GitHub Releases page (tag lostmaria-v1.0), not in git
+# The release zip goes on the GitHub Releases page (tags lostmaria-v1.0, lostmaria-v1.0.1), not in git
 *.zip
 build/
 release_build/

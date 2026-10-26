@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(
 from fontTools.ttLib import TTFont
 
 path = sys.argv[1]
-font = TTFont(path)
+font = TTFont(path, recalcTimestamp=False)   # keep head.modified: same input -> same file (release patches)
 n = 0
 for table in font["cmap"].tables:
     if table.isUnicode() and 0x2020 in table.cmap:
