@@ -22,7 +22,7 @@ Content warning (from the creators): horror, grotesque imagery and depictions of
 ## Install
 
 1. Buy and download the game from [BOOTH](https://luciferbrand.booth.pm/items/4591083) and extract it. Keep its Japanese file names: if Windows shows garbled names, extract it again with [7-Zip](https://www.7-zip.org/).
-2. Download `LostMaria_English_v1.0.1.zip` from the [Releases](https://github.com/Siegfried776/Elysium-translations/releases) page and extract it.
+2. Download `LostMaria_English_v1.0.1.zip` from its [release page](https://github.com/Siegfried776/Elysium-translations/releases/tag/lostmaria-v1.0.1) and extract it.
 3. Put the `LostMaria_English` folder inside the game folder, next to `start.exe` and `data`.
 4. Double-click `LostMaria_English\Install.bat`.
 5. Play with `start.exe`.

@@ -34,7 +34,7 @@ If you still spot text overflowing a box or an odd line break, please report it.
 
 ## Install
 
-1. Download `HAZ_English_Retranslation_v1.0.zip` from the [Releases](../../releases) page.
+1. Download `HAZ_English_Retranslation_v1.0.zip` from its [release page](https://github.com/Siegfried776/Elysium-translations/releases/tag/haz-v1.0).
 2. Close the game. In Steam, right-click **Heroine Anthem Zero** → *Manage* → *Browse local files*.
 3. Extract the zip so the `HAZ Retranslation Patch` folder sits next to `HeroineAnthemZero.exe`.
 4. Double-click `install.bat`.

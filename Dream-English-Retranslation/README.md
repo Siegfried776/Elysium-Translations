@@ -19,7 +19,7 @@ Only the English language option is changed. The other languages are untouched.
 
 ## Install (players)
 
-1. Download `Dream_English_Retranslation_v1.1.zip` from the [Releases](../../releases) page.
+1. Download `Dream_English_Retranslation_v1.1.zip` from its [release page](https://github.com/Siegfried776/Elysium-translations/releases/tag/dream-v1.1).
 2. Close the game. In Steam, right-click **Dream** → *Manage* → *Browse local files*.
 3. Extract the zip so the `Dream_English_Retranslation` folder sits next to `Dream.exe`.
 4. Double-click `apply_patch.bat`.
