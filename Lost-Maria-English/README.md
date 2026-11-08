@@ -69,7 +69,7 @@ Pure-Python tools for RPG Maker 2000 games (Python 3.9+; Pillow and fontTools fo
 
 ## Disclaimer
 
-This is an unofficial fan translation, not affiliated with or endorsed by LuciferBrand or ImCyan. All rights to LostMaria belong to its creators. You need to own the game; the patch only describes changes to files you already have.
+This is an unofficial fan translation. LostMaria's creator kindly reviewed the patch and corrected many of its images; all rights to the game belong to its creators (LuciferBrand / ImCyan). You need to own the game; the patch only describes changes to files you already have.
 
 ## Credits
 

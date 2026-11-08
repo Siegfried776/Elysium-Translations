@@ -71,7 +71,8 @@ WHAT THE PATCH CHANGES
 
 CREDITS
   LostMaria -名もなき花-: LuciferBrand (Rova) / ImCyan. All rights to the game belong to its creators.
-  This is an unofficial fan translation, not affiliated with or endorsed by them.
+  This is an unofficial fan translation. The game's creator kindly reviewed the patch and corrected
+  many of its images.
 
   Translation, editing and tools: Claude Opus 5.5 (Anthropic), under the direction of Siegfried776,
   who set the style, made the creative calls and play-tested the whole game.
