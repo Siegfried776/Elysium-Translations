@@ -17,6 +17,39 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import img_segments as S
 
 FONT_PATH = r"C:\Windows\Fonts\msgothic.ttc"
+# The developer's corrections for v1.21 (2026-11-03): where two letters touch at 12 px (e.g. "Re" in
+# "Refills" ran together) he opened a 1 px gap; lists with a cursor got their text 1 px lower.
+# UNTOUCH = lay out letter by letter and open a 1 px gap only between letters whose ink would touch;
+# DY = extra px down for every text line. Set by img_build (LM_IMG_STYLE); False/0 = the v1.0 look.
+UNTOUCH = False
+DY = 0
+_LAYOUT = {}
+
+
+def _ink_cols(font, ch):
+    """(first, last) inked column of one character drawn at x=0, or None for blanks."""
+    m = Image.new("L", (32, 20), 0)
+    d = ImageDraw.Draw(m)
+    d.fontmode = "1"
+    d.text((0, 0), ch, font=font, fill=255)
+    bb = m.getbbox()
+    return (bb[0], bb[2] - 1) if bb else None
+
+
+def _layout(font, s):
+    """x position of every character and the total advance, opening 1 px where letters touch."""
+    key = (id(font), s)
+    if key not in _LAYOUT:
+        xs, x, prev_right = [], 0, None
+        for ch in s:
+            ink = _ink_cols(font, ch)
+            if ink and prev_right is not None and x + ink[0] <= prev_right + 1:
+                x = prev_right + 2 - ink[0]          # leave exactly one blank column
+            xs.append(x)
+            prev_right = x + ink[1] if ink else None
+            x += int(round(font.getlength(ch)))
+        _LAYOUT[key] = (xs, x)
+    return _LAYOUT[key]
 
 
 def load_font(index=0, size=12):
@@ -33,6 +66,8 @@ def palette_index(im, rgb):
 
 
 def text_width(font, s):
+    if UNTOUCH:
+        return _layout(font, s.replace("g", "q"))[1]
     return int(round(font.getlength(s)))
 
 
@@ -45,12 +80,17 @@ def render_mask(font, s):
     # MS PGothic's 12 px bitmap 'g' is a cramped two-storey glyph that reads like an '8'
     # (play-test 2026-10-24). Draw a single-storey g instead: the 'q' (same 6 px advance)
     # with its descender turned into a hook.
-    d.text((0, 0), s.replace("g", "q"), font=font, fill=255)
+    if UNTOUCH:
+        xs = _layout(font, s.replace("g", "q"))[0]
+        for x, ch in zip(xs, s.replace("g", "q")):           # letter by letter, touching pairs apart
+            d.text((x, 0), ch, font=font, fill=255)
+    else:
+        d.text((0, 0), s.replace("g", "q"), font=font, fill=255)
     px = m.load()
     for i, ch in enumerate(s):
         if ch != "g":
             continue
-        x0 = text_width(font, s[:i])
+        x0 = _layout(font, s.replace("g", "q"))[0][i] if UNTOUCH else text_width(font, s[:i])
         ink = [(x, y) for x in range(x0, min(w, x0 + 6)) for y in range(20) if px[x, y]]
         if not ink:
             continue
@@ -197,7 +237,7 @@ def typeset(im, segs, texts, font, line_pitch=None, y_adjust=0):
             x = s["x0"] - bbox[0] if s["align"] == "left" else s["x1"] + 1 - w
             # baseline: capital bottom 2 px above the JP band bottom (room for descenders),
             # but never let descenders leave the image
-            y = s["y1"] - 2 - cap_bottom(font) + y_adjust + k * line_pitch
+            y = s["y1"] - 2 - cap_bottom(font) + y_adjust + k * line_pitch + DY
             y = min(y, H - 1 - (bbox[3] - 1))
             mp = m.load()
             for yy in range(m.height):

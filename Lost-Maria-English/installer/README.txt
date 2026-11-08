@@ -8,7 +8,8 @@ RPG made in RPG Maker 2000. This patch contains no game files: you need the game
 GET THE GAME
   Buy LostMaria from the official store, LuciferBrand on BOOTH (666 JPY):
   https://luciferbrand.booth.pm/items/4591083
-  This patch is made for that release (v1.20). Please support the creators.
+  This patch is made for the current release, v1.21. If you bought an older version, download the
+  game again from BOOTH: your purchase includes the update. Please support the creators.
 
   Warning (from the creators): the game contains horror, grotesque imagery and depictions of murder.
   Streaming and let's plays are allowed by the creators, monetized or not.
@@ -19,22 +20,18 @@ INSTALL
   2. Extract this zip and put the LostMaria_English folder inside the game folder,
      next to start.exe and the data folder.
   3. Double-click LostMaria_English\Install.bat.
-     - It checks that your game files are v1.20, backs up every original file it touches to
-       _original\, and installs the translation.
-     - The game uses sound effects from KADOKAWA's free RPG Maker 2000 RTP. If the RTP isn't installed
-       on your PC, the installer downloads the official RTP installer from KADOKAWA's site (10 MB),
-       checks it, and copies only the sounds the game uses into the game folder. It doesn't install
-       anything on your system. Without an internet connection, install the RTP yourself later from
-       https://www.rpgmakerweb.com/run-time-package
+     It checks that your game files are v1.21, backs up every original file it touches to
+     _original\, and installs the translation. No internet connection is needed.
   4. Play with start.exe, as usual.
 
   Uninstall: double-click LostMaria_English\Uninstall.bat. It restores every original file.
   Your saves are never touched (they stay in the data folder).
+  Updating from an earlier version of this patch: replace the old LostMaria_English folder with the
+  new one and run Install.bat; only the changed files are updated.
 
-WHY EASYRPG?
-  The original RPG Maker 2000 runtime no longer runs on modern Windows (it fails with a DirectDraw
-  error). The patch installs EasyRPG Player, a free and open-source RPG Maker 2000 interpreter, in
-  place of data\RPG_RT.exe (the original is kept in _original\), so start.exe launches it.
+ABOUT v1.21
+  Since v1.21 the game itself ships with EasyRPG Player (the original RPG Maker 2000 runtime no
+  longer runs on modern Windows) and with the RPG Maker 2000 RTP, so nothing else is needed.
 
 CONTROLS
   Arrow keys         move, move the cursor
@@ -49,12 +46,14 @@ HOW THIS GAME WORKS (no spoilers)
   - The "†" number on the save screen counts how many important characters have died.
   - Keep several save files instead of overwriting one, so you can go back and try a different outcome.
   - Endings you have reached are recorded; a second playthrough continues from a cleared save.
-  - The game's own manual is translated too: data\manual.htm.
+  - The game's own manual is translated too: manual.htm in the game folder.
 
 WHAT THE PATCH CHANGES
   Translated: all dialogue, narration, choices, menus, item and skill cards, the battle screen,
   ending cards, staff roll, title screen and manual (about 5,800 text entries and 550 images).
   The text uses the Ark Pixel font (12 px, proportional), with line breaks fitted to the message box.
+  Many of the English images were corrected by the game's creator for v1.21 (alignment with
+  the cursor, letter spacing, the title subtitle). Thank you!
 
   Changes beyond the text (disclosed so you know what isn't original):
   - Photosensitivity: four "old film" strobe effects flashed about 12-15 times per second. They now
@@ -63,13 +62,12 @@ WHAT THE PATCH CHANGES
     its original strength.
   - The loud RTP "buzz" sound is muted in menus, shops and when cancelling a choice (story scenes
     keep it).
-  - Talking to one character in the sealed room before the final battle fully heals the party,
-    using the game's own resting logic. The original room has no exit and no healing, so a save
-    there with low health and no items could leave you stuck.
   - One added hint line at the Geofront gate: Noah thinks of going back to rest, which is what
     moves things on there (another character already had such a line).
   - Sword Arts menu: pressing Up on the first art goes to the last learned art.
   - Each body-part food item has its own description card; the save screen shows the "†" mark.
+  (The heal from Elliot before the final battle, added by v1.0 of this patch, is now part of the
+  official game since v1.21.)
 
 CREDITS
   LostMaria -名もなき花-: LuciferBrand (Rova) / ImCyan. All rights to the game belong to its creators.
@@ -77,5 +75,6 @@ CREDITS
 
   Translation, editing and tools: Claude Opus 5.5 (Anthropic), under the direction of Siegfried776,
   who set the style, made the creative calls and play-tested the whole game.
+  Image corrections for v1.21: ImCyan.
 
-  Third-party software (EasyRPG Player, Ark Pixel Font, xdelta3, 7-Zip): see licenses\.
+  Third-party software (Ark Pixel Font, xdelta3): see licenses\.

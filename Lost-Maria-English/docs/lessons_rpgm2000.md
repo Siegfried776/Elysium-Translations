@@ -121,6 +121,17 @@ See the **game-image-text-translation** skill (written from this project). RM200
 - 8-bit palette PNGs: keep the palette and the transparent index. Segment by palette index.
 - Text in artwork: erase only the letter pixels (diff against a median-smoothed copy) and never paste copied
   texture over a region.
+- **What the game's creator fixed in our images (v1.21, 454 images, none caught in our play-test):**
+  - MS PGothic 12 px runs some pairs together ("We", "Yo", "Th", "Re"): open a 1 px gap only where two
+    letters' ink would touch (`img_typeset.UNTOUCH`), not uniform tracking.
+  - Our baseline rule put English 1 px too high next to the menu cursor: check list images with the cursor
+    on each row.
+  - Erasing whole segment boxes wiped the 1 px shade line inside panel borders (106 images):
+    erase text pixels only; `img_shading.py` finds the damage.
+  - 12 px item-name strips → 14 px (placed by centre: text 1 px lower, no event change).
+  - The thin title subtitle was hard to read; judge title lettering at 1:1.
+  - Measure corrections before generalising them (our first guess was worse than no change), and
+    send the creator the remaining cases to approve.
 
 ## 9. Process lessons
 

@@ -86,19 +86,30 @@ for dp, dn, fn in os.walk(os.path.join(GAME, "data")):
 shutil.rmtree(TB)
 
 # EasyRPG Player replaces RPG_RT.exe, so the game's own start.exe launches it
+# (v1.21 ships this exact EasyRPG build as its RPG_RT.exe: nothing to install then)
 player = os.path.join(root, "vendor", "easyrpg-0.8.1.1", "x", "Player.exe")
-shutil.copy2(player, os.path.join(FILES, "new", "RPG_RT.exe"))
-rows.append({"path": "data\\RPG_RT.exe", "op": "copy", "payload": "new\\RPG_RT.exe", "base": "data\\RPG_RT.exe",
-             "base_sha": sha(os.path.join(ORIG, "data", "RPG_RT.exe")), "dst_sha": sha(player)})
-# English manual (the original links its pictures from data\manual\, unchanged)
+if sha(player) != sha(os.path.join(ORIG, "data", "RPG_RT.exe")):
+    shutil.copy2(player, os.path.join(FILES, "new", "RPG_RT.exe"))
+    rows.append({"path": "data\\RPG_RT.exe", "op": "copy", "payload": "new\\RPG_RT.exe", "base": "data\\RPG_RT.exe",
+                 "base_sha": sha(os.path.join(ORIG, "data", "RPG_RT.exe")), "dst_sha": sha(player)})
+    print("EasyRPG: installed as data\\RPG_RT.exe")
+else:
+    print("EasyRPG: the game already ships it")
+# English manual, replacing the game's own wherever it sits: data\manual.htm up to v1.21's first build,
+# the game folder itself since the revised v1.21 (2026-11-07; pictures stay in data\manual\)
 man = os.path.join(root, "release", "manual_en.htm")
+man_rel = "manual.htm" if os.path.exists(os.path.join(ORIG, "manual.htm")) else "data\\manual.htm"
 shutil.copy2(man, os.path.join(FILES, "new", "manual.htm"))
-rows.append({"path": "data\\manual.htm", "op": "copy", "payload": "new\\manual.htm", "base": "data\\manual.htm",
-             "base_sha": sha(os.path.join(ORIG, "data", "manual.htm")), "dst_sha": sha(man)})
+rows.append({"path": man_rel, "op": "copy", "payload": "new\\manual.htm", "base": man_rel,
+             "base_sha": sha(os.path.join(ORIG, man_rel)), "dst_sha": sha(man)})
 
 cols = ["path", "op", "payload", "base", "base_sha", "dst_sha"]
 tu.write_tsv(os.path.join(FILES, "manifest.tsv"), cols, rows)
-shutil.copy2(os.path.join(root, "release", "rtp_files.tsv"), os.path.join(FILES, "rtp_files.tsv"))
+# RTP sounds: only those the base game doesn't ship (v1.21 bundles the whole RTP: none, and no 7-Zip)
+rtp = [r for r in tu.read_tsv(os.path.join(root, "release", "rtp_files.tsv"))
+       if not any(os.path.exists(os.path.join(ORIG, "data", r["folder"], r["jp"] + ext)) for ext in (".wav", ".mid", ".mp3", ".ogg"))]
+tu.write_tsv(os.path.join(FILES, "rtp_files.tsv"), ["folder", "jp", "en"], rtp)
+print(f"RTP sounds to fetch at install: {len(rtp)}")
 
 # installer, tools, licences
 I = os.path.join(root, "release", "installer")
@@ -109,14 +120,17 @@ for f in ("install.ps1", "uninstall.ps1"):
 for f in ("Install.bat", "Uninstall.bat"):
     t = open(os.path.join(I, f), encoding="utf-8").read()
     open(os.path.join(PKG, f), "w", encoding="ascii", newline="\r\n").write(t)
-for f in ("7z.exe", "7z.dll"):
-    shutil.copy2(os.path.join(root, "vendor", "7zip", f), os.path.join(FILES, "bin", f))
+if rtp:
+    for f in ("7z.exe", "7z.dll"):
+        shutil.copy2(os.path.join(root, "vendor", "7zip", f), os.path.join(FILES, "bin", f))
 shutil.copy2(XD, os.path.join(FILES, "bin", "xdelta3.exe"))
 L = os.path.join(PKG, "licenses")
 os.makedirs(L)
-shutil.copy2(os.path.join(root, "vendor", "licenses", "GPL-3.0.txt"), os.path.join(L, "EasyRPG-Player_GPL-3.0.txt"))
+if any(r["path"] == "data\\RPG_RT.exe" for r in rows):
+    shutil.copy2(os.path.join(root, "vendor", "licenses", "GPL-3.0.txt"), os.path.join(L, "EasyRPG-Player_GPL-3.0.txt"))
 shutil.copy2(os.path.join(root, "vendor", "licenses", "Apache-2.0.txt"), os.path.join(L, "xdelta3_Apache-2.0.txt"))
-shutil.copy2(os.path.join(root, "vendor", "7zip", "License.txt"), os.path.join(L, "7-Zip_License.txt"))
+if rtp:
+    shutil.copy2(os.path.join(root, "vendor", "7zip", "License.txt"), os.path.join(L, "7-Zip_License.txt"))
 shutil.copy2(os.path.join(root, "vendor", "fonts", "ark-pixel-12px-proportional", "x", "OFL.txt"),
              os.path.join(L, "Ark-Pixel-Font_OFL-1.1.txt"))
 shutil.copy2(os.path.join(root, "release", "THIRD_PARTY.txt"), os.path.join(L, "THIRD_PARTY.txt"))

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1 — 2026-11-08
+
+- Made for game v1.21 (BOOTH). v1.21 ships EasyRPG Player and the RPG Maker 2000 RTP, so the installer no longer swaps the runtime or downloads anything; the zip shrinks from 12.7 MB to 3.6 MB.
+- The creator's own corrections to the English images (text aligned with the menu cursor, touching letters separated, frame shading restored, a clearer title subtitle), used exactly as made. The same letter-spacing fix applied to the remaining 24 images that needed it.
+- v1.21's new and changed lines translated: herb pickups show their heal amount, a new traveler line, the official notice for Elliot's heal.
+- The Elliot heal this patch added in 1.0 is now part of the game, so the patch no longer adds it.
+- Manual: follows the game's v1.21 manual (now `manual.htm` in the game folder, new tip on the Swiftfoot Leaf for boss fights, new pictures).
+- Installer: computes file hashes with .NET directly (works where PowerShell's Get-FileHash can't load).
+
 ## 1.0.1 — 2026-10-26
 
 - Manual (`data\manual.htm`): English edited to match the game's translation (natural wording, one tense, no passive phrasing). The game itself is unchanged.

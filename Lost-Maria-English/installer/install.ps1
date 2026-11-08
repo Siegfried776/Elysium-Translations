@@ -16,6 +16,7 @@ $bin  = Join-Path $here "bin"
 $RTP_URL  = "https://assets.rpgmakerweb.com/rpg2000_rtp_installer.exe"
 $RTP_SHA  = "ec82b92da65ca6fdb2d3df25dfbcd7f2bb716e4fe63a079e8e5e396e91fa5e29"
 $RTP_PAGE = "https://www.rpgmakerweb.com/run-time-package"
+$GAME_VERSION = "v1.21"                  # the BOOTH release the manifest's base hashes come from
 
 function Fail($msg) {
     Write-Host ""
@@ -23,7 +24,12 @@ function Fail($msg) {
     Write-Host "Nothing more was changed. Run Uninstall.bat to undo any partial install." -ForegroundColor Red
     exit 1
 }
-function Sha($p) { (Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash.ToLower() }
+function Sha($p) {
+    # .NET directly: Get-FileHash lives in a module that some setups fail to load
+    $s = [IO.File]::OpenRead($p)
+    try { ([BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($s)) -replace '-', '').ToLower() }
+    finally { $s.Dispose() }
+}
 function ReadTsv($p) {
     $lines = Get-Content -LiteralPath $p -Encoding UTF8
     $head = $lines[0] -split "`t"
@@ -65,11 +71,12 @@ foreach ($r in $rows) {
 if ($bad.Count) {
     $bad | Select-Object -First 10 | ForEach-Object { Write-Host "  $_" }
     if ($bad.Count -gt 10) { Write-Host "  ... and $($bad.Count - 10) more" }
-    Fail ("$($bad.Count) game files are missing or differ from LostMaria v1.20 (BOOTH). " +
+    Fail ("$($bad.Count) game files are missing or differ from LostMaria $GAME_VERSION (BOOTH). " +
+          "If you have an older version, download the current one from BOOTH again (your purchase includes it). " +
           "If the missing names look garbled, the game zip was extracted without its Japanese file names: " +
-          "extract it again with 7-Zip, or reinstall the game, then run Install.bat again.")
+          "extract it again with 7-Zip, then run Install.bat again.")
 }
-Write-Host "Game files OK (v1.20). $($todo.Count) of $($rows.Count) files to install."
+Write-Host "Game files OK ($GAME_VERSION). $($todo.Count) of $($rows.Count) files to install."
 
 # ---- 2. back up, then patch / copy ------------------------------------------------------------------
 if (-not (Test-Path -LiteralPath $bak)) { New-Item -ItemType Directory -Path $bak | Out-Null }
@@ -171,7 +178,7 @@ Remove-Item -LiteralPath $tmp -Recurse -Force
 
 Set-Content -LiteralPath (Join-Path $game "ENGLISH_PATCH.txt") -Encoding UTF8 -Value @(
     "The LostMaria English patch is installed in this folder.",
-    "Play: start.exe (runs EasyRPG Player, installed as data\RPG_RT.exe).",
+    "Play: start.exe, as usual.",
     "Undo: run Uninstall.bat in the LostMaria_English folder. The original files are in _original\.",
     "Your saves (data\Save*.lsd) are never touched.")
 Write-Host ""

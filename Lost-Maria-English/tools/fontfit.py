@@ -421,8 +421,9 @@ def left_align(lines, centred):
 
 
 # system notices that keep one notice per line (no refilling): the battle-end results in CE0248
-# ("Harvested food from the corpse." / "Found 116G." / the gold split; user, play-test 2026-10-25)
-KEEP_LINES = ("CE0248:",)
+# ("Harvested food from the corpse." / "Found 116G." / the gold split; user, play-test 2026-10-25),
+# and the v1.21 heal notice (the developer's two-line notice, one statement per line)
+KEEP_LINES = ("CE0248:", "Map0206:E0021:P01:C0032")
 
 
 def apply(text, kind, uid="", jp=""):
