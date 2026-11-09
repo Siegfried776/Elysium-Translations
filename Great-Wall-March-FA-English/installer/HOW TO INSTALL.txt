@@ -1,0 +1,27 @@
+Great Wall March FA - English translation patch
+================================================
+
+Needs: Great Wall March FA v1.043 (the final DLsite version).
+
+INSTALL
+1. Put this "GWM English Patch" folder inside the game folder, next to Game.exe and the "www" folder.
+2. Double-click install.bat.
+   It checks every file first and changes nothing if your game isn't v1.043.
+   Your original files are backed up in "GWM English Patch\backup".
+
+OPTIONAL: EXE ICON AND NAME
+Double-click exe_icon_and_name.bat to give the game exe the game's own icon and rename
+Game.exe to GWMFA.exe (start the game with GWMFA.exe afterwards). uninstall.bat undoes it.
+
+UNINSTALL
+Double-click uninstall.bat. It puts the original Japanese files back.
+Keep this folder (with its "backup" subfolder) for as long as the patch is installed.
+
+After installing, see readme_en.txt (the developer's readme in English) and credits_en.txt in the game folder.
+Fullscreen: F4 or Alt+Enter, or the Fullscreen option at the top of the Options menu.
+Saves from the Japanese version keep working.
+You can rename the game folder itself (e.g. to "Great Wall March FA"); the game, the patch and your saves
+(kept in www\save inside it) all work under any folder name.
+
+This is an unofficial fan translation (AI translation by Claude Opus 5.5, directed and tested by Siegfried776).
+xdelta3.exe is xdelta 3.1.0 by Joshua MacDonald, Apache License 2.0.

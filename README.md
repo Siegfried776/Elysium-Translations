@@ -7,6 +7,7 @@ Game translation projects by **Siegfried776**: new English translations and tran
 | [Dream — English Retranslation](Dream-English-Retranslation/) | 映夢 Dream ([Steam](https://store.steampowered.com/app/1345750/)) | 1.1 (final) | [Download](../../releases/tag/dream-v1.1) |
 | [Heroine Anthem Zero — English Retranslation](Heroine-Anthem-Zero-Retranslation/) | Heroine Anthem Zero ([Steam](https://store.steampowered.com/app/537990/)) | 1.0 | [Download](../../releases/tag/haz-v1.0) |
 | [LostMaria -The Nameless Flower- — English Translation](Lost-Maria-English/) | LostMaria -名もなき花- ([BOOTH](https://luciferbrand.booth.pm/items/4591083)) | 1.1 | [Download](../../releases/tag/lostmaria-v1.1) |
+| [Great Wall March FA — English Translation](Great-Wall-March-FA-English/) | グレートウォール行進曲FA ([DLsite](https://www.dlsite.com/home/work/=/product_id/RJ277619.html)) | 1.0 | [Download](../../releases/tag/gwm-v1.0) |
 
 ## About
 
