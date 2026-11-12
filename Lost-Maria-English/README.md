@@ -4,9 +4,9 @@ A complete English fan translation of **LostMaria -名もなき花-** (LuciferBr
 
 > **Get the game:** buy LostMaria from the official store, [LuciferBrand on BOOTH](https://luciferbrand.booth.pm/items/4591083) (666 JPY). This patch contains no game files and is made for the current release (v1.21). If you bought an older version, download it again from BOOTH: your purchase includes the update. Please support the creators.
 
-> **How this was made:** this translation and its tools were produced by **Claude Opus 5.5**, Anthropic's AI model, under the direction of **Siegfried776**. Claude translated and edited the script, re-typeset the images and wrote the tools and installer. Siegfried776 piloted the project: set the style, made the creative calls, play-tested the whole game, and found and reported the bugs.
+> **How this was made:** translated with **Claude Opus 5.5** (AI), directed, edited and play-tested by **Siegfried776**, who set the style, made the creative calls and played the whole game to find and fix what didn't work. Claude also re-typeset the images and wrote the tools and installer.
 
-**Version 1.1** · about 5,800 text entries (dialogue, narration, choices, menus, database) and about 550 images (menus, item and skill cards, battle screen, ending cards, staff roll, title screen), plus the game's manual.
+**Version 1.1.1** · about 5,800 text entries (dialogue, narration, choices, menus, database) and about 550 images (menus, item and skill cards, battle screen, ending cards, staff roll, title screen), plus the game's manual.
 
 Content warning (from the creators): horror, grotesque imagery and depictions of murder. The creators allow streaming and let's plays, monetized or not.
 
@@ -21,7 +21,7 @@ Content warning (from the creators): horror, grotesque imagery and depictions of
 ## Install
 
 1. Buy and download the game from [BOOTH](https://luciferbrand.booth.pm/items/4591083) and extract it. Keep its Japanese file names: if Windows shows garbled names, extract it again with [7-Zip](https://www.7-zip.org/).
-2. Download `LostMaria_English_v1.1.zip` from the [Releases](https://github.com/Siegfried776/Elysium-translations/releases) page and extract it.
+2. Download `LostMaria_English_v1.1.1.zip` from the [Releases](https://github.com/Siegfried776/Elysium-translations/releases) page and extract it.
 3. Put the `LostMaria_English` folder inside the game folder, next to `start.exe` and `data`.
 4. Double-click `LostMaria_English\Install.bat`.
 5. Play with `start.exe`.
@@ -37,8 +37,9 @@ Still on game v1.20? Re-download the game from BOOTH (recommended), or use patch
 Disclosed so you know what isn't original:
 
 - The four "old film" strobe effects flash about 3 times per second instead of 12–15, and the flickering-light effect in many rooms dims the screen at half strength.
-- The loud RTP "buzz" is muted in menus, shops and when cancelling a choice (story scenes keep it).
+- The loud RTP "buzz" plays at half volume in menus, shops and when cancelling a choice (story scenes keep it at full volume).
 - One added hint line at the Geofront gate, pointing to the next step.
+- The three shops' Info talks each end with one added sentence explaining Invest (the game never explains it).
 - Sword Arts menu: pressing Up on the first art goes to the last learned art.
 - Each body-part food item has its own description card; the save screen shows the "†" mark.
 

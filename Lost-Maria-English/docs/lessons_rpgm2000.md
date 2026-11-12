@@ -122,8 +122,10 @@ See the **game-image-text-translation** skill (written from this project). RM200
 - Text in artwork: erase only the letter pixels (diff against a median-smoothed copy) and never paste copied
   texture over a region.
 - **What the game's creator fixed in our images (v1.21, 454 images, none caught in our play-test):**
-  - MS PGothic 12 px runs some pairs together ("We", "Yo", "Th", "Re"): open a 1 px gap only where two
-    letters' ink would touch (`img_typeset.UNTOUCH`), not uniform tracking.
+  - MS PGothic 12 px merges some pairs ("Re", "Th", "y:", "y."): keep one blank pixel column between
+    every two letters, not uniform tracking. The creator first left overhang pairs ("To", "Ve", "Yo")
+    as they were, then asked for them 1 dot apart too ("reads better"), so ask the creator which
+    look they want before fixing their images.
   - Our baseline rule put English 1 px too high next to the menu cursor: check list images with the cursor
     on each row.
   - Erasing whole segment boxes wiped the 1 px shade line inside panel borders (106 images):

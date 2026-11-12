@@ -19,6 +19,16 @@ patches = json.load(open(os.path.join(root, "work", "event_patches.json"), encod
 # しびれ2, heard on every choice cancel (item pick-ups, the elevator) once the RTP was installed;
 # muted like the event uses (user, play-test 2026-10-24; tools/mute_ui_se.py).
 SYSTEM_MUTE = {0x2B: "しびれ2", 0x2C: "しびれ2"}
+# The developer (2026-11-12) asked for the buzz back at a quiet 10-50% instead of silence: a key
+# press with no sound confuses players. "mute_se" rules and the system SEs play at BUZZ_PCT percent
+# of their original volume (originals 80/90/100); 50 chosen by the user after listening to 20/30/50
+# test copies (2026-11-12). LM_BUZZ_PCT overrides it for listening tests.
+BUZZ_PCT = int(os.environ.get("LM_BUZZ_PCT", "50"))
+assert 0 < BUZZ_PCT <= 100, "the buzz must stay audible (developer, 2026-11-12): no volume 0"
+
+
+def buzz_volume(orig):
+    return round(orig * BUZZ_PCT / 100)
 
 
 def _pairs(b):
@@ -45,7 +55,8 @@ def mute_system_se(f):
             snd, tail = _pairs(item[1])
             name = lcf.get(snd, 0x01, b"").decode(lcf.ENC)
             assert name == SYSTEM_MUTE[item[0]], f"system SE {item[0]:#x} is {name}, expected {SYSTEM_MUTE[item[0]]}"
-            lcf.set_(snd, 0x03, lcf.ber_write(0))                     # volume 0
+            orig = lcf.ber_read(bytes(lcf.get(snd, 0x03, lcf.ber_write(100))), 0)[0]
+            lcf.set_(snd, 0x03, lcf.ber_write(buzz_volume(orig)))      # quiet, not silent
             snd.sort(key=lambda p: p[0])
             item[1] = _join(snd, tail)
             n += 1
@@ -124,8 +135,11 @@ for fname, ps in by_file.items():
             for c in cmds:
                 if (c.code == p["code"] and c.params[:len(p["match"])] == p["match"]
                         and ("match_text" not in p or c.text.decode(lcf.ENC) == p["match_text"])):
-                    for k, v in p["set"].items():
-                        c.params[int(k)] = v
+                    if p.get("kind") == "mute_se":
+                        c.params[0] = buzz_volume(c.params[0])
+                    else:
+                        for k, v in p["set"].items():
+                            c.params[int(k)] = v
                     n += 1
         assert n == p["count"], f"{p['list']} {p.get('match') or p.get('match_text')}: changed {n}, expected {p['count']}"
         total += n

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 — unreleased
+
+- Images: one blank pixel column between every two letters, including pairs like "You" and "We", in our images and in the creator's corrected ones (his preference). Ten more of his images with touching letters fixed, with his approval.
+- The RTP "buzz" in menus, shops and choice cancels plays at half volume instead of being muted (at the creator's request: a key press with no sound is confusing).
+- README: the added Invest sentence in the shops' Info talks is now listed with the other changes beyond the text.
+
 ## 1.1 — 2026-11-08
 
 - Made for game v1.21 (BOOTH). v1.21 ships EasyRPG Player and the RPG Maker 2000 RTP, so the installer no longer swaps the runtime or downloads anything; the zip shrinks from 12.7 MB to 3.6 MB.

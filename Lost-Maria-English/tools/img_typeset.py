@@ -19,34 +19,67 @@ import img_segments as S
 FONT_PATH = r"C:\Windows\Fonts\msgothic.ttc"
 # The developer's corrections for v1.21 (2026-11-03): where two letters touch at 12 px (e.g. "Re" in
 # "Refills" ran together) he opened a 1 px gap; lists with a cursor got their text 1 px lower.
-# UNTOUCH = lay out letter by letter and open a 1 px gap only between letters whose ink would touch;
+# UNTOUCH = lay out letter by letter and open a 1 px gap only between letters whose pixels would meet;
 # DY = extra px down for every text line. Set by img_build (LM_IMG_STYLE); False/0 = the v1.0 look.
 UNTOUCH = False
+# GAP: "column" = a blank column between every two letters' ink (developer, 2026-11-12: also You/We);
+# "pixel" = only where pixels meet (the 2026-11-08 revert, kept for comparison: LM_IMG_GAP=pixel)
+GAP = os.environ.get("LM_IMG_GAP", "column")
 DY = 0
 _LAYOUT = {}
+LOG = None          # list: every drawn line (image, text, x, y, colours) when a tool needs positions
+CURRENT = ""        # name of the image being rendered (set by img_build)
 
 
-def _ink_cols(font, ch):
-    """(first, last) inked column of one character drawn at x=0, or None for blanks."""
-    m = Image.new("L", (32, 20), 0)
-    d = ImageDraw.Draw(m)
-    d.fontmode = "1"
-    d.text((0, 0), ch, font=font, fill=255)
-    bb = m.getbbox()
-    return (bb[0], bb[2] - 1) if bb else None
+_PIX = {}
+
+
+def _ink_pix(font, ch):
+    """set of inked pixels of one character drawn at (0, 0)."""
+    key = (id(font), ch)
+    if key not in _PIX:
+        m = Image.new("L", (32, 20), 0)
+        d = ImageDraw.Draw(m)
+        d.fontmode = "1"
+        d.text((0, 0), ch, font=font, fill=255)
+        p = m.load()
+        _PIX[key] = frozenset((x, y) for y in range(20) for x in range(32) if p[x, y])
+    return _PIX[key]
+
+
+def _touch(a, ax, b, bx):
+    """do glyph pixel sets a (at x=ax) and b (at x=bx) meet, also diagonally?"""
+    pa = {(x + ax, y) for x, y in a}
+    return any((x + bx + dx, y + dy) in pa for x, y in b for dx in (-1, 0, 1) for dy in (-1, 0, 1))
 
 
 def _layout(font, s):
-    """x position of every character and the total advance, opening 1 px where letters touch."""
+    """x position of every character and the total advance, opening 1 px where two letters' pixels
+    would meet (also diagonally): "Re", "Th", "y:", "y.". Pairs whose columns only overlap at
+    different heights ("To", "Ve", "We", "Yo": the overhang) keep their normal spacing, as in the
+    developer's own corrections (2026-11-08; the first, column-based version also split overhangs)."""
     key = (id(font), s)
     if key not in _LAYOUT:
-        xs, x, prev_right = [], 0, None
+        xs, x, prev = [], 0, None
         for ch in s:
-            ink = _ink_cols(font, ch)
-            if ink and prev_right is not None and x + ink[0] <= prev_right + 1:
-                x = prev_right + 2 - ink[0]          # leave exactly one blank column
+            ink = _ink_pix(font, ch)
+            if ink and prev is not None and GAP == "column":
+                # one blank column between the letters' ink, overhangs included ("To", "We", "Yo"):
+                # the developer's choice (2026-11-12, "1 dot apart reads better"); the 24 images he
+                # approved on 2026-11-07 were made this way
+                right = max(px for px, _ in prev[0]) + prev[1]
+                x = max(x, right + 2 - min(px for px, _ in ink))
+            elif ink and prev is not None:
+                while _touch(prev[0], prev[1], ink, x):     # prev = (pixels, x, char)
+                    x += 1                           # usually once: one blank pixel between them
+                # the serifed capital I crowds a following lowercase letter even where nothing touches
+                # ("Item" read "ltem"); the developer gave it 1 px in 13 of 14 "It" (he left all-caps
+                # "IG" alone): keep one blank column after an I before a lowercase letter
+                if prev[2] == "I" and ch.islower():
+                    right = max(px for px, _ in prev[0]) + prev[1]
+                    x = max(x, right + 2 - min(px for px, _ in ink))
             xs.append(x)
-            prev_right = x + ink[1] if ink else None
+            prev = (ink, x, ch) if ink else None
             x += int(round(font.getlength(ch)))
         _LAYOUT[key] = (xs, x)
     return _LAYOUT[key]
@@ -239,6 +272,12 @@ def typeset(im, segs, texts, font, line_pitch=None, y_adjust=0):
             # but never let descenders leave the image
             y = s["y1"] - 2 - cap_bottom(font) + y_adjust + k * line_pitch + DY
             y = min(y, H - 1 - (bbox[3] - 1))
+            if LOG is not None:            # line positions for tools that edit derived images (touchfix)
+                LOG.append({"image": CURRENT, "line": line, "x": x, "y": y, "align": s["align"],
+                            "color": tuple(pal[s["color"] * 3:s["color"] * 3 + 3]),
+                            "shadow": tuple(pal[sh * 3:sh * 3 + 3]) if sh is not None else None,
+                            "bg": tuple(pal[bg * 3:bg * 3 + 3]), "size": [W, H],
+                            "font": [font.path, font.index, font.size]})
             mp = m.load()
             for yy in range(m.height):
                 for xx in range(m.width):

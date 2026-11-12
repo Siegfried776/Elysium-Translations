@@ -60,10 +60,12 @@ WHAT THE PATCH CHANGES
     flash about 3 times per second, within the usual photosensitivity guideline (WCAG / Harding:
     at most 3 flashes per second). The flickering-light effect in many rooms dims the screen at half
     its original strength.
-  - The loud RTP "buzz" sound is muted in menus, shops and when cancelling a choice (story scenes
-    keep it).
+  - The loud RTP "buzz" sound plays at half volume in menus, shops and when cancelling a choice
+    (story scenes keep it at full volume).
   - One added hint line at the Geofront gate: Noah thinks of going back to rest, which is what
     moves things on there (another character already had such a line).
+  - The three shops' Info talks each end with one added sentence explaining Invest (the game never
+    explains it).
   - Sword Arts menu: pressing Up on the first art goes to the last learned art.
   - Each body-part food item has its own description card; the save screen shows the "†" mark.
   (The heal from Elliot before the final battle, added by v1.0 of this patch, is now part of the
