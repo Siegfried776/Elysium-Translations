@@ -80,4 +80,4 @@ This is an unofficial fan translation. LostMaria's creator kindly reviewed the p
 - **Image corrections for v1.21:** ImCyan.
 - [Ark Pixel Font](https://github.com/TakWolf/ark-pixel-font) (OFL-1.1), [xdelta3](https://github.com/jmacd/xdelta) (Apache-2.0); for patch v1.0.x also [EasyRPG Player](https://github.com/EasyRPG/Player) 0.8.1.1 (GPL-3.0) and [7-Zip](https://www.7-zip.org/) (LGPL). See `installer/THIRD_PARTY.txt`.
 
-The code in this repository is under the MIT License (`LICENSE`). Third-party software keeps its own licence.
+The code in this repository is under the MIT License (`LICENSE`). Third-party software keeps its own license.

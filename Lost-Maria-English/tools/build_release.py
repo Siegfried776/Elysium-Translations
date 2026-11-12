@@ -111,7 +111,7 @@ rtp = [r for r in tu.read_tsv(os.path.join(root, "release", "rtp_files.tsv"))
 tu.write_tsv(os.path.join(FILES, "rtp_files.tsv"), ["folder", "jp", "en"], rtp)
 print(f"RTP sounds to fetch at install: {len(rtp)}")
 
-# installer, tools, licences
+# installer, tools, licenses
 I = os.path.join(root, "release", "installer")
 for f in ("install.ps1", "uninstall.ps1"):
     t = open(os.path.join(I, f), encoding="utf-8").read()

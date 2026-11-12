@@ -4,8 +4,8 @@ Used by merge.py as the last step (after every overlay), so it always works on c
   1. screams: a run of 8+ identical letters is shortened until its line fits
   2. a line wider than the box moves its last word to the next line of the same box; the last
      line of a unit may open a new line only if its 4-line box has room (pagination never changes)
-  3. lines that were centred with spaces (padding within 1.5 cells of centred in the old 6 px grid)
-     are re-centred by pixel width
+  3. lines that were centered with spaces (padding within 1.5 cells of centered in the old 6 px grid)
+     are re-centered by pixel width
 python -I tools/fontfit.py      -> report: lines changed, lines still too wide
 """
 import os, re
@@ -72,9 +72,9 @@ def shorten_scream(line):
     return line[:m.start()] + line[m.start() + 1:]
 
 
-def fit_lines(lines, centred):
-    """Wrap/shorten lines wider than LIMIT; `centred` (list of bools) is kept in step with lines."""
-    lines, centred = list(lines), list(centred)
+def fit_lines(lines, centered):
+    """Wrap/shorten lines wider than LIMIT; `centered` (list of bools) is kept in step with lines."""
+    lines, centered = list(lines), list(centered)
     i = 0
     while i < len(lines):
         guard = 0
@@ -85,7 +85,7 @@ def fit_lines(lines, centred):
                 lines[i] = s
                 continue
             codes, pad, body = split_lead(lines[i])
-            if len(pad) >= 2:                         # drop centring padding first (a single
+            if len(pad) >= 2:                         # drop centering padding first (a single
                 lines[i] = codes + pad[:-1] + body    # space after a code is layout: keep it)
                 continue
             if " " not in body.strip():
@@ -99,28 +99,28 @@ def fit_lines(lines, centred):
                 # continuation line: no code of its own (the source's style for document boxes:
                 # instant text stays on until \<), keep the indent
                 lines.append((pad or (" " if codes else "")) + word)
-                centred.append(centred[i])
+                centered.append(centered[i])
             else:
                 lines[i] = codes + pad + head + " " + word   # nowhere to go: leave it, reported
                 break
         i += 1
-    return lines, centred
+    return lines, centered
 
 
 END = re.compile(r"""[.!?)"'\]]+(?:\\[.|!^$_<>])*\s*$""")
 
 
-def balance_runs(lines, centred):
+def balance_runs(lines, centered):
     """Re-break sentences that run across lines so the lines come out even (user, play-test: the
     script was wrapped for the old 50-cell monospaced font, which left orphans like
     "...what this / curse really is...!" in the narrower proportional font). A run is a line whose
     text goes on in the next line (no sentence-final punctuation; next line starts lowercase,
     same leading codes/padding, same 4-line box). The run keeps its number of lines; breaks are
-    chosen to minimise the widest line, then the spread. Centred lines are left alone."""
+    chosen to minimize the widest line, then the spread. Centered lines are left alone."""
     out, i = list(lines), 0
     while i < len(out):
         j = i
-        while (j + 1 < len(out) and (j + 1) // 4 == i // 4 and not centred[j] and not centred[j + 1]
+        while (j + 1 < len(out) and (j + 1) // 4 == i // 4 and not centered[j] and not centered[j + 1]
                and out[j].strip() and not END.search(out[j])
                and split_lead(out[j + 1])[:2] == split_lead(out[i])[:2]
                and (re.match(r"[a-z0-9(]", split_lead(out[j + 1])[2])
@@ -195,13 +195,13 @@ def _best_breaks(words, n, prefixes):
 DLG = re.compile(r'^(?:\\N\[\d+\]|[^\s\\][^:␤]{0,20}): ["(]')     # speaker as text or as \N[n]
 
 
-def reflow_dialogue(lines, centred):
+def reflow_dialogue(lines, centered):
     """Speech boxes (one box, 'Name: "...' or 'Name: (...'): fill each line, sentences running on
     (user, play-test: two sentences running across three full lines read better than one sentence
     per line). No single-word last line. Returns
-    None for anything else: centred or indented text, blank lines, multi-box units (moving text
+    None for anything else: centered or indented text, blank lines, multi-box units (moving text
     between boxes would shift their breaks)."""
-    if not 2 <= len(lines) <= 4 or any(centred) or not DLG.match(lines[0]):
+    if not 2 <= len(lines) <= 4 or any(centered) or not DLG.match(lines[0]):
         return None
     if any(not l.strip() for l in lines) or any(split_lead(l)[0] or split_lead(l)[1] for l in lines[1:]):
         return None
@@ -224,13 +224,13 @@ def reflow_dialogue(lines, centred):
 SENT_END = re.compile(r"""[.!?]["')]?(?:\\[.|!^$_<>])*\s*$""")
 
 
-def reflow_indented(lines, centred):
+def reflow_indented(lines, centered):
     """Indented notes in one box (every line the same leading codes/padding, e.g. '\\> '): lines that
     form running prose are re-filled like speech (user, play-test: a three-line note took four
     lines for three lines of text). Line i joins i+1 only when the sentence runs on (no final
     punctuation, next line lowercase) or a sentence ends and the next begins (final . ! ?, next line
     capitalised); headings and list items (no final punctuation, next line capitalised) stay apart."""
-    if not 2 <= len(lines) <= 4 or any(centred) or any(not l.strip() for l in lines):
+    if not 2 <= len(lines) <= 4 or any(centered) or any(not l.strip() for l in lines):
         return None
     codes, pad, _ = split_lead(lines[0])
     if not (codes or pad) or any(split_lead(l)[:2] != (codes, pad) for l in lines):
@@ -354,23 +354,23 @@ def _fill_breaks(words, n, pre=""):
     return r[1] if r else None
 
 
-AREA = 304          # message text area: x 8..312 (measured in game); its centre is x 160 - 8 = 152
+AREA = 304          # message text area: x 8..312 (measured in game); its center is x 160 - 8 = 152
 
 
-def recenter_block(lines, centred):
-    """Re-centre the centred lines of one message together. Padding is whole 6 px spaces, so each
-    line's centre lands up to 3 px off; choose the shared centre (within 3 px of the true one) that
-    keeps the lines' centres closest to each other (play-test: long + short line looked uneven)."""
-    idx = [i for i, c in enumerate(centred) if c and split_lead(lines[i])[2]]
+def recenter_block(lines, centered):
+    """Re-center the centered lines of one message together. Padding is whole 6 px spaces, so each
+    line's center lands up to 3 px off; choose the shared center (within 3 px of the true one) that
+    keeps the lines' centers closest to each other (play-test: long + short line looked uneven)."""
+    idx = [i for i, c in enumerate(centered) if c and split_lead(lines[i])[2]]
     if not idx:
         return lines
     widths = {i: px(split_lead(lines[i])[2]) for i in idx}
     best = None
-    for k in range(-6, 7):                       # candidate centre: 152 +/- 3 px in 0.5 px steps
+    for k in range(-6, 7):                       # candidate center: 152 +/- 3 px in 0.5 px steps
         c = AREA / 2 + k / 2
         pads = {i: max(0, round((c - widths[i] / 2) / CELL)) for i in idx}
-        centres = [CELL * pads[i] + widths[i] / 2 for i in idx]
-        score = (max(centres) - min(centres), abs(sum(centres) / len(centres) - AREA / 2))
+        centers = [CELL * pads[i] + widths[i] / 2 for i in idx]
+        score = (max(centers) - min(centers), abs(sum(centers) / len(centers) - AREA / 2))
         if best is None or score < best[0]:
             best = (score, pads)
     out = list(lines)
@@ -385,7 +385,7 @@ SPACER = re.compile(r"\\>\s*")
 
 def caption_layout(lines):
     """Cutscene captions (one box: blank '\\>' spacer lines first, then speakerless text), left-aligned
-    and re-filled like speech (user, play-test: centred captions looked awkward). Spacers are added
+    and re-filled like speech (user, play-test: centered captions looked awkward). Spacers are added
     at the top for every line saved, so the text stays at the bottom of the box. The lines' own
     leading codes (\\> instant on, \\< off) move inline with their first word."""
     if not 2 <= len(lines) <= 4 or not SPACER.fullmatch(lines[0]):
@@ -415,9 +415,9 @@ def caption_layout(lines):
     return ["\\>"] * max(len(lines) - len(out), min(k, 1)) + out     # at least one spacer stays
 
 
-def left_align(lines, centred):
-    """Centred lines lose their centring padding (user, play-test: no centred text)."""
-    return [split_lead(l)[0] + split_lead(l)[2] if c else l for l, c in zip(lines, centred)]
+def left_align(lines, centered):
+    """Centered lines lose their centering padding (user, play-test: no centered text)."""
+    return [split_lead(l)[0] + split_lead(l)[2] if c else l for l, c in zip(lines, centered)]
 
 
 # system notices that keep one notice per line (no refilling): the battle-end results in CE0248
@@ -432,16 +432,16 @@ def apply(text, kind, uid="", jp=""):
         return text
     KW_ENDS = jp_keywait_ends(jp) if jp else None
     lines = text.split(SEP)
-    centred = [is_centred(l) for l in lines]
+    centered = [is_centred(l) for l in lines]
     keep = uid.startswith(KEEP_LINES)
-    flowed = None if keep else (reflow_dialogue(lines, centred) or reflow_indented(lines, centred)
+    flowed = None if keep else (reflow_dialogue(lines, centered) or reflow_indented(lines, centered)
                                 or caption_layout(lines))
     if flowed:
         return SEP.join(flowed)
-    lines, centred = fit_lines(lines, centred)
+    lines, centered = fit_lines(lines, centered)
     if not keep:
-        lines = balance_runs(lines, centred)
-    lines = left_align(lines, centred)
+        lines = balance_runs(lines, centered)
+    lines = left_align(lines, centered)
     return SEP.join(lines)
 
 

@@ -4,8 +4,8 @@ python -I tools/img_segments.py <png> [--debug out.png]          -> prints JSON 
 Library use: segments(img) -> list of dicts {line, seg, x0, y0, x1, y1, color, align}
 
 Rules (palette-index based, image stays in P mode):
-- background = the panel grey (191,191,175); shadow = (170,170,154)
-- text colours: dark (34,34,34), greys, and border-red pixels that are NOT part of a
+- background = the panel gray (191,191,175); shadow = (170,170,154)
+- text colours: dark (34,34,34), grays, and border-red pixels that are NOT part of a
   straight run >= RUN px (borders are long straight runs; glyph strokes are short)
 - lines = rows of text pixels grouped into bands; a band splits into segments at
   horizontal gaps > GAP px
@@ -85,7 +85,7 @@ def text_mask(im):
         for x in range(W):
             i = px[x, y]
             if i in textlike:
-                # text must sit on panel background: at least one bg/shadow neighbour
+                # text must sit on panel background: at least one bg/shadow neighbor
                 mask[y][x] = True
             elif i in red_idx and not struct[y][x] and not near_struct(x, y):
                 mask[y][x] = True

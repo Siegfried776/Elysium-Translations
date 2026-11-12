@@ -6,7 +6,7 @@ work/regressions.tsv rows: kind / where / text / why
   must     *          text   at least one unit contains it
   nowhere  *          text   no unit may contain it
   line     <unit id>  text   the unit must have exactly this line (layout codes ignored)
-Plus layout checks: no line over the box width, no centred line, no letterless non-silence box,
+Plus layout checks: no line over the box width, no centered line, no letterless non-silence box,
 key-wait regressions against the JP no higher than the recorded 6.
 """
 import sys, os, re
@@ -55,7 +55,7 @@ for r in units:
         if fontfit.px(l) > fontfit.LIMIT:
             fails.append(f"WIDE     {r['id']}: {round(fontfit.px(l))} px")
         if fontfit.is_centred(l):
-            fails.append(f"CENTRED  {r['id']}")
+            fails.append(f"CENTERED  {r['id']}")
 n_kw = 0
 for r in units:
     if r["kind"] != "msg" or "\\!" not in r["en"]:

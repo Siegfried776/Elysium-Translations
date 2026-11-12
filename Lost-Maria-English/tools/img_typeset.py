@@ -7,8 +7,8 @@ CLI test:  python -I tools/img_typeset.py <png> <out.png> "<text for seg 0>" "<s
 
 Erase: the segment box (+1 px for the shadow) is filled with the panel background, but only
 pixels that are background / shadow / text colours (borders are never touched).
-Draw: MS Gothic 12 px bitmap glyphs (no anti-aliasing), shadow at +1,+1 in the shadow colour,
-text in the segment's own colour. Left segments start at the original x; right segments end
+Draw: MS Gothic 12 px bitmap glyphs (no anti-aliasing), shadow at +1,+1 in the shadow color,
+text in the segment's own color. Left segments start at the original x; right segments end
 at the original right edge.
 """
 import sys, os
@@ -110,8 +110,8 @@ def render_mask(font, s):
     m = Image.new("L", (w, 20), 0)
     d = ImageDraw.Draw(m)
     d.fontmode = "1"
-    # MS PGothic's 12 px bitmap 'g' is a cramped two-storey glyph that reads like an '8'
-    # (play-test 2026-10-24). Draw a single-storey g instead: the 'q' (same 6 px advance)
+    # MS PGothic's 12 px bitmap 'g' is a cramped two-story glyph that reads like an '8'
+    # (play-test 2026-10-24). Draw a single-story g instead: the 'q' (same 6 px advance)
     # with its descender turned into a hook.
     if UNTOUCH:
         xs = _layout(font, s.replace("g", "q"))[0]
@@ -218,8 +218,8 @@ def typeset(im, segs, texts, font, line_pitch=None, y_adjust=0):
     sh = next((i for i in colors if tuple(pal[i * 3:i * 3 + 3]) == S.SHADOW), None)
     mask, _, _ = S.text_mask(im)
     if bg is None and segs:
-        # non-standard panel (e.g. a CG): background = commonest colour around the text,
-        # shadow = commonest colour diagonally below text pixels
+        # non-standard panel (e.g. a CG): background = commonest color around the text,
+        # shadow = commonest color diagonally below text pixels
         from collections import Counter
         s0 = segs[0]
         around = Counter(px[x, y] for y in range(max(0, s0["y0"] - 2), min(H, s0["y1"] + 3))
@@ -360,7 +360,7 @@ def block_line_cap(segs, t, first):
 
 # Item-card stat numbers drawn exactly like the game draws Bloodrune's live number (CE0046 +
 # work/event_patches.json): the game's own digit pictures (Picture/全角　N, 10x20), first digit in
-# the leftmost slot, 7 px apart. Slot 1 is centred at screen x 228, y 53; the card's top-left is
+# the leftmost slot, 7 px apart. Slot 1 is centered at screen x 228, y 53; the card's top-left is
 # (159, 33) -> picture top-left in card coords (64, 10). (Play-test: "13" and "10" looked different.)
 STAT_X, STAT_Y, STAT_PITCH = 228 - 5 - 159, 53 - 10 - 33, 7    # 7: the glyphs are 7 px with shadow
 
@@ -404,7 +404,7 @@ def paste_game_digits(im, num, x0, y0):
         for y in range(d.height):
             for x in range(d.width):
                 i = dp[x, y]
-                if i == 0:                                  # the picture's transparent colour
+                if i == 0:                                  # the picture's transparent color
                     continue
                 rgb = tuple(dpal[i * 3:i * 3 + 3])
                 if rgb not in idx:
@@ -556,9 +556,9 @@ def paste_sprite(im, sprite, x0):
 def typeset_status(im, text, font, bar=3, gap=2):
     """DATA-screen status word (状態　*.png, 38x12). The last `bar` columns are a slice of the
     panel's red border; the word sits left of it in dark (normal) or dark red (ailments) with a
-    grey shadow. The game centres the picture on the border-side panel, so: keep the border slice
+    gray shadow. The game centers the picture on the border-side panel, so: keep the border slice
     at the right, right-align the English against it, and widen symmetrically (transparent index
-    0 on both sides) so the game's centre still lands the slice on the border."""
+    0 on both sides) so the game's center still lands the slice on the border."""
     W, H = im.size
     px = im.load()
     pal = im.getpalette()
@@ -594,9 +594,9 @@ def typeset_status(im, text, font, bar=3, gap=2):
 
 
 def typeset_banner(im, text, font, min_margin=None, anchor_right=False):
-    """Single-line call-out: erase all text, widen if needed, draw the English centred.
+    """Single-line call-out: erase all text, widen if needed, draw the English centered.
     anchor_right: the text ends where the JP ended and the picture grows only to the left
-    (symmetric widening keeps the game's centre; the right-hand padding is transparent).
+    (symmetric widening keeps the game's center; the right-hand padding is transparent).
     For status words on the DATA screen, whose right edge touches the panel border."""
     segs = S.segments(im)
     if not segs:
@@ -618,7 +618,7 @@ def typeset_banner(im, text, font, min_margin=None, anchor_right=False):
         return typeset(out, fake, [text], font)
     new_w = max(im.width, w + 2 * margin)
     if new_w % 2 != im.width % 2:
-        new_w += 1          # keep the centre where it was
+        new_w += 1          # keep the center where it was
     out = widen(erased, new_w)
     x0 = (new_w - w) // 2
     fake = [{"line": 0, "seg": 0, "x0": x0, "y0": y1 - 11, "x1": x0 + w - 1, "y1": y1, "color": color, "align": "left"}]

@@ -46,7 +46,7 @@ Tools named here live in the project's `tools\` folder; most are generic RM2000 
 The built-in EasyRPG font is monospaced (6 px per half-width cell, 50 cells per line). English in it looks like
 a terminal. **Ark Pixel 12px proportional** (SIL OFL 1.1) looked native and was "perfect" in play.
 
-- Ship it as `data\Font\Font.ttf` + `Font2.ttf` with the OFL licence.
+- Ship it as `data\Font\Font.ttf` + `Font2.ttf` with the OFL license.
 - **EasyRPG sizes a bundled font as `12 × unitsPerEm / (OS/2 winAscent + winDescent)`.** The stock Ark Pixel
   came out at 9 px. `patch_font_metrics.py` patches only the metrics (glyphs untouched) so it renders at exactly
   12 px: ascent/descent **10/2 px** in OS/2 win + typo and hhea. At 13 px the g/p/y tails were clipped.
@@ -70,7 +70,7 @@ enough; the boxes have to read as if written in English. `fontfit.py`, called by
 - **Narration that runs across lines:** re-balance over the same number of lines (`balance_runs`). Line counts
   stay the same; orphans go.
 - **Captions** (blank `\>` spacer lines, then text): left-align and refill, and put the spacers on top. The
-  user preferred left-aligned to full-width-space centring, which never lines up in a proportional font.
+  user preferred left-aligned to full-width-space centering, which never lines up in a proportional font.
 - **Key-waits `\!`:** break after a click **only where the JP ends its line at that click** (matched by order).
   JP mid-line clicks stay inline. Forcing a break after every click turned one box into a stack of one-question lines.
 - **System notices** (battle loot, "Inventory full") are never refilled (`KEEP_LINES`): one notice per line.
@@ -130,9 +130,9 @@ See the **game-image-text-translation** skill (written from this project). RM200
     on each row.
   - Erasing whole segment boxes wiped the 1 px shade line inside panel borders (106 images):
     erase text pixels only; `img_shading.py` finds the damage.
-  - 12 px item-name strips → 14 px (placed by centre: text 1 px lower, no event change).
+  - 12 px item-name strips → 14 px (placed by center: text 1 px lower, no event change).
   - The thin title subtitle was hard to read; judge title lettering at 1:1.
-  - Measure corrections before generalising them (the first guess was worse than no change), and
+  - Measure corrections before generalizing them (the first guess was worse than no change), and
     send the creator the remaining cases to approve.
 
 ## 9. Process lessons
