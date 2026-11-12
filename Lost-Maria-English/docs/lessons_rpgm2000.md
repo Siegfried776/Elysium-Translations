@@ -121,25 +121,25 @@ See the **game-image-text-translation** skill (written from this project). RM200
 - 8-bit palette PNGs: keep the palette and the transparent index. Segment by palette index.
 - Text in artwork: erase only the letter pixels (diff against a median-smoothed copy) and never paste copied
   texture over a region.
-- **What the game's creator fixed in our images (v1.21, 454 images, none caught in our play-test):**
+- **What the game's creator fixed in the patch's images (v1.21, 454 images, none caught in my play-test):**
   - MS PGothic 12 px merges some pairs ("Re", "Th", "y:", "y."): keep one blank pixel column between
     every two letters, not uniform tracking. The creator first left overhang pairs ("To", "Ve", "Yo")
     as they were, then asked for them 1 dot apart too ("reads better"), so ask the creator which
     look they want before fixing their images.
-  - Our baseline rule put English 1 px too high next to the menu cursor: check list images with the cursor
+  - The baseline rule put English 1 px too high next to the menu cursor: check list images with the cursor
     on each row.
   - Erasing whole segment boxes wiped the 1 px shade line inside panel borders (106 images):
     erase text pixels only; `img_shading.py` finds the damage.
   - 12 px item-name strips → 14 px (placed by centre: text 1 px lower, no event change).
   - The thin title subtitle was hard to read; judge title lettering at 1:1.
-  - Measure corrections before generalising them (our first guess was worse than no change), and
+  - Measure corrections before generalising them (the first guess was worse than no change), and
     send the creator the remaining cases to approve.
 
 ## 9. Process lessons
 
 - **Regression gate.** Every play-test fix gets a row in `work/regressions.tsv` (must / nowhere / line), checked
   by `regress.py` right after merge. The build stops **before** touching the play copy. A line-anchored overlay
-  rule once stopped matching silently and undid a fix ("We can't be undoing fixes").
+  rule once stopped matching silently and undid a fix.
 - **Layered overlays with a fixed order** (tl → ed → tcheck → tlc → lead → play-test), then global rules, then
   the punctuation stage, then fitting. A late rename is one rule in merge plus one in img_merge, applied
   after every overlay and inside the punctuation edits, and a save rename for the load screen.

@@ -2,18 +2,18 @@
 
 ## 1.1.1 — unreleased
 
-- Images: one blank pixel column between every two letters, including pairs like "You" and "We", in our images and in the creator's corrected ones (his preference). Ten more of his images with touching letters fixed, with his approval.
-- The RTP "buzz" in menus, shops and choice cancels plays at half volume instead of being muted (at the creator's request: a key press with no sound is confusing).
+- Images: one blank pixel column between every two letters in all English images, including pairs like "You" and "We" (the creator's preference). Ten more of the creator's images with touching letters fixed, with his approval.
+- The RTP "buzz" in menus, shops and choice cancels plays at half volume instead of being muted, at the creator's request.
 - README: the added Invest sentence in the shops' Info talks is now listed with the other changes beyond the text.
 
 ## 1.1 — 2026-11-08
 
 - Made for game v1.21 (BOOTH). v1.21 ships EasyRPG Player and the RPG Maker 2000 RTP, so the installer no longer swaps the runtime or downloads anything; the zip shrinks from 12.7 MB to 3.6 MB.
 - The creator's own corrections to the English images (text aligned with the menu cursor, touching letters separated, frame shading restored, a clearer title subtitle), used exactly as made. The same letter-spacing fix applied to the remaining 24 images that needed it.
-- v1.21's new and changed lines translated: herb pickups show their heal amount, a new traveler line, the official notice for Elliot's heal.
-- The Elliot heal this patch added in 1.0 is now part of the game, so the patch no longer adds it.
+- v1.21's new and changed lines translated: herb pickups show their heal amount, a new traveler line, the official notice for the heal before the final battle.
+- That heal, added by this patch in 1.0, is now part of the game, so the patch no longer adds it.
 - Manual: follows the game's v1.21 manual (now `manual.htm` in the game folder, new tip on the Swiftfoot Leaf for boss fights, new pictures).
-- Installer: computes file hashes with .NET directly (works where PowerShell's Get-FileHash can't load).
+- Installer: file checks now work on PCs where PowerShell's Get-FileHash fails.
 
 ## 1.0.1 — 2026-10-26
 

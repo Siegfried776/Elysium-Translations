@@ -5,7 +5,7 @@ python -I tools/build_release.py <version>          e.g. 1.0
 2. diff build/release_game/data against original/data:
    changed game files -> xdelta3 patch against the original ("patch")
    new translation images (LM_*) -> xdelta3 against the card they are drawn from ("patch")
-   our own files (font, EasyRPG as data/RPG_RT.exe, English manual.htm) -> shipped as they are ("copy")
+   the patch's own files (font, EasyRPG as data/RPG_RT.exe, English manual.htm) -> shipped as they are ("copy")
 3. stage release_build/LostMaria_English/ (Install.bat, Uninstall.bat, README.txt, files/...) and zip it
    to release_build/LostMaria_English_v<version>.zip
 manifest.tsv columns: path (in the game folder), op, payload (in files/), base (original file the patch

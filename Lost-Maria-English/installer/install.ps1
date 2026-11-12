@@ -123,7 +123,7 @@ foreach ($r in $todo) {
 Write-Host "Installed $n files."
 
 # ---- 3. RPG Maker 2000 RTP sound effects -------------------------------------------------------------
-# The game uses sounds from KADOKAWA's free RTP that it doesn't ship. We don't redistribute them: they are
+# The game uses sounds from KADOKAWA's free RTP that it doesn't ship. This patch doesn't redistribute them: they are
 # downloaded from KADOKAWA's site, checked, and only the ones the game uses are copied into data\.
 $rtp = @(ReadTsv (Join-Path $here "rtp_files.tsv"))
 $need = @($rtp | Where-Object { -not (Test-Path -LiteralPath (Join-Path $data "$($_.folder)\$($_.jp).wav")) })

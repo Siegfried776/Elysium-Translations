@@ -15,7 +15,7 @@ Content warning (from the creators): horror, grotesque imagery and depictions of
 - **Natural English**, edited for voice and checked line by line against the Japanese.
 - **A real proportional font:** text is set in [Ark Pixel](https://github.com/TakWolf/ark-pixel-font) 12 px, with every message box re-filled to read like English (no one-word lines, waits and key presses kept where the Japanese has them).
 - **Images re-typeset** in the game's own pixel style and palette, and corrected by the game's creator for v1.21 (alignment with the cursor, letter spacing, the title subtitle).
-- **Runs on modern Windows:** since v1.21 the game itself ships with [EasyRPG Player](https://easyrpg.org/) and the RPG Maker 2000 RTP, so the patch only adds the translation. (Version 1.0.x of this patch, for game v1.20, installed EasyRPG and fetched the RTP sounds from KADOKAWA itself.)
+- **Runs on modern Windows:** since v1.21 the game ships with [EasyRPG Player](https://easyrpg.org/) and the RPG Maker 2000 RTP, so the patch only adds the translation.
 - **Photosensitivity:** the four "old film" strobe effects (originally 12–15 flashes per second) now stay within the common guideline of at most 3 flashes per second.
 
 ## Install
@@ -43,7 +43,7 @@ Disclosed so you know what isn't original:
 - Sword Arts menu: pressing Up on the first art goes to the last learned art.
 - Each body-part food item has its own description card; the save screen shows the "†" mark.
 
-Version 1.0 of this patch also added a full heal from one character in the sealed room before the final battle (the room has no exit and no healing, so a low-health save there could leave you stuck). The creator made that part of the official game in v1.21, so this patch no longer needs to add it.
+Patch v1.0 also added a full heal in the sealed room before the final battle, so a low-health save there can't leave you stuck. Since v1.21 that heal is part of the official game.
 
 ## Repository layout
 

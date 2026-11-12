@@ -56,20 +56,17 @@ WHAT THE PATCH CHANGES
   the cursor, letter spacing, the title subtitle). Thank you!
 
   Changes beyond the text (disclosed so you know what isn't original):
-  - Photosensitivity: four "old film" strobe effects flashed about 12-15 times per second. They now
-    flash about 3 times per second, within the usual photosensitivity guideline (WCAG / Harding:
-    at most 3 flashes per second). The flickering-light effect in many rooms dims the screen at half
-    its original strength.
-  - The loud RTP "buzz" sound plays at half volume in menus, shops and when cancelling a choice
+  - The four "old film" strobe effects flash about 3 times per second instead of 12-15
+    (photosensitivity guideline), and the flickering-light effect in many rooms dims the screen
+    at half strength.
+  - The loud RTP "buzz" plays at half volume in menus, shops and when cancelling a choice
     (story scenes keep it at full volume).
-  - One added hint line at the Geofront gate: Noah thinks of going back to rest, which is what
-    moves things on there (another character already had such a line).
+  - One added hint line at the Geofront gate, pointing to the next step.
   - The three shops' Info talks each end with one added sentence explaining Invest (the game never
     explains it).
   - Sword Arts menu: pressing Up on the first art goes to the last learned art.
   - Each body-part food item has its own description card; the save screen shows the "†" mark.
-  (The heal from Elliot before the final battle, added by v1.0 of this patch, is now part of the
-  official game since v1.21.)
+  (Patch v1.0 also added a heal before the final battle; since v1.21 it is part of the game.)
 
 CREDITS
   LostMaria -名もなき花-: LuciferBrand (Rova) / ImCyan. All rights to the game belong to its creators.

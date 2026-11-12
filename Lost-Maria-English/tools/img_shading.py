@@ -1,8 +1,8 @@
-"""Frame shading our text erase wiped (found by the developer, v1.21 image fixes).
+"""Frame shading the text erase wiped (found by the developer, v1.21 image fixes).
 
 Panels have a 1 px shading line (the palette's shade colour) inside their dark-red border. Erasing the
 Japanese text by segment box also erased that line wherever a box touched it. A pixel is damaged when
-the original has the shade colour there, sits next to a border pixel, and our image has background.
+the original has the shade colour there, sits next to a border pixel, and the new image has background.
 
 python -I tools/img_shading.py [img_root]       report damaged images (default build/img)
 Library: restore(orig_im, new_im) -> number of pixels put back (in place, palette images).
