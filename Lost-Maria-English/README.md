@@ -37,7 +37,7 @@ Still on game v1.20? Re-download the game from BOOTH (recommended), or use patch
 Disclosed so you know what isn't original:
 
 - The four "old film" strobe effects flash about 3 times per second instead of 12–15, and the flickering-light effect in many rooms dims the screen at half strength.
-- The loud RTP "buzz" plays at half volume in menus, shops and when cancelling a choice (story scenes keep it at full volume).
+- The loud RTP "buzz" plays at half volume in menus, shops and when canceling a choice (story scenes keep it at full volume).
 - One added hint line at the Geofront gate, pointing to the next step.
 - The three shops' Info talks each end with one added sentence explaining Invest (the game never explains it).
 - Sword Arts menu: pressing Up on the first art goes to the last learned art.
